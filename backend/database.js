@@ -1,11 +1,8 @@
 const mysql = require("mysql2");
-require('dotenv').config(); // Load environment variables from .env file
+require("dotenv").config(); // Load environment variables from .env file
 
-const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD
-});
+const dbUrl = `mysql://root:PbCopkAUDNwBLdOUxOGEmJXupzQWCULL@viaduct.proxy.rlwy.net:44116/railway`
+
+const connection = mysql.createConnection(dbUrl);
 
 module.exports = connection;
