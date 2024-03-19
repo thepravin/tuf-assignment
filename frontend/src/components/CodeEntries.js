@@ -6,7 +6,7 @@ const CodeEntries = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/getentries")
+      .get(`${process.env.REACT_APP_BACKEND_URL}/getentries`)
       .then((res) => {
         setEntries(res.data);
       })
