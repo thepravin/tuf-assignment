@@ -53,10 +53,10 @@ const CodeForm = () => {
                         onChange={handleChange}
                     >
                         <option value=""></option>
-                        <option value="C++">C++</option>
-                        <option value="Java">Java</option>
-                        <option value="JavaScript">JavaScript</option>
-                        <option value="Python">Python</option>
+                        <option value="cpp">C++</option>
+                        <option value="java">Java</option>
+                        <option value="c">C</option>
+                        <option value="python3">Python3</option>
                     </select>
                 </div>
                 <div className="mb-4">

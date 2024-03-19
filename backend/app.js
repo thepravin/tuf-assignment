@@ -28,7 +28,7 @@ app.post('/insertdata', (req, res) => {
 
 
 app.get('/getentries', (req, res) => {
-    const sql = "SELECT username, code_language, stdin, LEFT(source_code, 100) AS source_code, timestamp FROM codeentries";
+    const sql = "SELECT username, code_language, stdin,source_code, timestamp FROM codeentries";
     connection.query(sql, (err, data) => {
         if (err) {
             console.error("Error fetching entries:", err);
