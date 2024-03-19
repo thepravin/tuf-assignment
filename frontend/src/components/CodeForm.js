@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
 
 const CodeForm = () => {
     const [formData, setFormData] = useState({
         username: '',
-        code_language: '',
+        code_language: 'cpp',
         stdin: '',
-        source_code: ''
+        source_code: '',
+        stdout:'',
     });
+    const navigateTo = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -17,13 +20,43 @@ const CodeForm = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8080/insertdata",formData)
-        .then(res=>alert("Store Successfully !!"))
-        .catch(err=>console.log(err))
-    };
 
+        try {
+            const res = await axios.post("https://online-code-compiler.p.rapidapi.com/v1/", {
+                code: formData.source_code,
+                language: formData.code_language,
+                input: formData.stdin,
+            }, {
+                headers: {
+                    'X-RapidAPI-Host': 'online-code-compiler.p.rapidapi.com',
+                    "x-rapidapi-key": "35aebf1e4fmsh7cbd6ef8a1481dfp173d5fjsn5091f0913069",
+                    "content-type": "application/json",
+                }
+            });
+
+            const responseData = res.data;
+            setFormData(prevState => ({
+                ...prevState,
+                stdout: responseData.output
+            }));
+
+            console.log(responseData.output);
+            console.log(formData);
+
+            await axios.post("http://localhost:8080/insertdata", {
+                ...formData,
+                stdout: responseData.output
+            });
+            
+            alert("Stored Successfully !!");
+            navigateTo("/codeentries")
+        } catch (error) {
+            console.error(error);
+            alert("Error occurred while storing data");
+        }
+    };
     return (
         <div className="max-w-md mx-auto mt-8">
             <form onSubmit={handleSubmit} className="bg-slate-100 shadow-lg rounded px-8 pt-6 pb-8 mb-4">
@@ -48,7 +81,7 @@ const CodeForm = () => {
                     <select
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="code_language"
-                        name="code_language"
+                        name="code_language"                      
                         value={formData.code_language}
                         onChange={handleChange}
                     >

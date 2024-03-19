@@ -9,12 +9,14 @@ app.use(express.json())
 
 
 app.post('/insertdata', (req, res) => {
-    const sql = "INSERT INTO codeentries (`username`, `code_language`, `stdin`, `source_code`) VALUES (?, ?, ?, ?)";
+    const sql = "INSERT INTO codeentries (`username`, `code_language`, `stdin`, `source_code`,`stdout`) VALUES (?, ?, ?, ?,?)";
+    console.log(req.body)
     const values = [
         req.body.username,
         req.body.code_language,
         req.body.stdin,
-        req.body.source_code
+        req.body.source_code,
+        req.body.stdout
     ];
 
     connection.query(sql, values, (err, data) => {
@@ -28,7 +30,7 @@ app.post('/insertdata', (req, res) => {
 
 
 app.get('/getentries', (req, res) => {
-    const sql = "SELECT username, code_language, stdin,source_code, timestamp FROM codeentries";
+    const sql = "SELECT username, code_language, stdin,source_code,stdout, timestamp FROM codeentries";
     connection.query(sql, (err, data) => {
         if (err) {
             console.error("Error fetching entries:", err);
