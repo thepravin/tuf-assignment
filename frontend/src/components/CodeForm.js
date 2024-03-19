@@ -31,7 +31,7 @@ const CodeForm = () => {
             }, {
                 headers: {
                     'X-RapidAPI-Host': 'online-code-compiler.p.rapidapi.com',
-                    "x-rapidapi-key": "35aebf1e4fmsh7cbd6ef8a1481dfp173d5fjsn5091f0913069",
+                    "x-rapidapi-key": process.env.REACT_APP_API_KEY,
                     "content-type": "application/json",
                 }
             });
@@ -59,6 +59,7 @@ const CodeForm = () => {
     };
     return (
         <div className="max-w-md mx-auto mt-8">
+            
             <form onSubmit={handleSubmit} className="bg-slate-100 shadow-lg rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
