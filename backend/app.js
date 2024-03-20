@@ -16,6 +16,8 @@ app.use(cors(corsAllow));
 
 app.use(express.json())
 
+// Middleware to handle OPTIONS requests
+app.options('*', cors(corsAllow));
 
 
 app.post('/insertdata', (req, res) => {
