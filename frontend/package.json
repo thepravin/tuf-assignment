@@ -1,8 +1,17 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "proxy":"https://tuf-assignment-production.up.railway.app",
   "private": true,
+  "proxy": {
+    "/insertdata" : {
+      "target" : "https://tuf-assignment-production.up.railway.app",
+      "changeOrigin" : true
+    },
+    "/jobs" : {
+      "target" : "https://stackoverflow.com",
+      "changeOrigin" : true
+    }
+  },
   "dependencies": {
     "@material-tailwind/html": "^2.2.2",
     "@testing-library/jest-dom": "^5.17.0",
