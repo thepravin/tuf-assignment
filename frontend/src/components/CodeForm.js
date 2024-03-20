@@ -45,7 +45,7 @@ const CodeForm = () => {
             console.log(responseData.output);
             console.log(formData);
 
-            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/insertdata`, {
+            await axios.post(`/insertdata`, {
                 ...formData,
                 stdout: responseData.output
             });
