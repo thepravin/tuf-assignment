@@ -5,9 +5,16 @@ const cors = require('cors')
 const dotenv = require("dotenv");
 dotenv.config();
 
-app.use(cors());
+const corsAllow = {
+    origin: "https://tuf-assignment.netlify.app",
+    methods: "PUT,GET,POST,PATCH,DELETE,HEAD",
+    credentials:true
+}
+
+app.use(cors(corsAllow));
 
 app.use(express.json())
+
 
 
 app.post('/insertdata', (req, res) => {
