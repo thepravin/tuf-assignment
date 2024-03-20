@@ -6,10 +6,11 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const corsAllow = {
-    origin: "https://tuf-assignment.netlify.app",
-    methods: "PUT,GET,POST,PATCH,DELETE,HEAD",
-    credentials:true
+    origin: ["https://tuf-assignment.netlify.app"],
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    credentials: true,
 }
+
 
 app.use(cors(corsAllow));
 
